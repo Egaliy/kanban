@@ -12,7 +12,11 @@ permissions:
 
 concurrency:
   group: "pages"
+<<<<<<< HEAD
   cancel-in-progress: false
+=======
+  cancel-in-progress: true
+>>>>>>> f6f2546400a0b75933b4a8323c9aaa4eb9fb22bf
 
 jobs:
   build:
@@ -20,6 +24,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+<<<<<<< HEAD
       
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -40,6 +45,23 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
+=======
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+      - name: Install
+        run: npm install
+      - name: Set base path for Pages
+        run: echo "BASE_PATH=/${GITHUB_REPOSITORY#*/}/" >> $GITHUB_ENV
+      - name: Build
+        run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+>>>>>>> f6f2546400a0b75933b4a8323c9aaa4eb9fb22bf
 
   deploy:
     environment:
